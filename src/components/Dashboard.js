@@ -17,14 +17,10 @@ const Dashboard = () => {
   // console.log("this is token in dashboard component",rider)
   useEffect(() => {
     const pageNo = page.toString();
-    const url = "https://do-rider.cheetay.pk/alerts_rider?page=" + pageNo;
-    const result = fetch(url, {
+    const url = `${process.env.REACT_APP_BASE_URL}/alerts_rider?page=` + pageNo;
+    fetch(url, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // 'Authorization': `Token ${token}`
-        Authorization: "token 692afd3e4b33ee5eba6daaab786907798189d7da",
-      },
+      headers: window.h,
     })
       .then((res) => res.json())
       .then((data) => {
@@ -35,6 +31,7 @@ const Dashboard = () => {
         // console.log(rider,'this is rider data')
       });
   }, [page]);
+  //  generinc functions. URL search param.
 
   const handlePage = (e) => {
     if (e.target.value === "next") {
@@ -51,10 +48,12 @@ const Dashboard = () => {
 
   const handleclick = (id, phone, name1) => {
     const pageNo = page.toString();
-    console.log("this is phone", phone);
-    const Id = id;
-    if (Id && page && name1 && phone) {
-      navigate("/chat", { state: { pageNo, name1, Id, phone } });
+    // console.log("this is phone", phone);
+    // const Id = id;
+    const state = { pageNo, name1, id, phone };
+    console.log("this is my state:", state);
+    if (id && page && name1 && phone) {
+      navigate("/riderChat", { state: { pageNo, name1, Id: id, phone } });
     }
   };
 
@@ -74,25 +73,27 @@ const Dashboard = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rider.results.map((row) => (
+                {rider.results.map((rider) => (
                   <TableRow
-                    key={row.id}
+                    key={rider.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     style={{ cursor: "pointer" }}
                     onClick={() =>
                       handleclick(
-                        row.last_alert?.rider,
-                        row.mobile_number,
-                        row.name
+                        rider.last_alert?.rider,
+                        rider.mobile_number,
+                        rider.name
                       )
                     }
                   >
                     <TableCell component="th" scope="row">
-                      {row.name}
+                      {rider.name}
                     </TableCell>
-                    <TableCell align="right">{row.id}</TableCell>
-                    <TableCell align="right">{row.mobile_number}</TableCell>
-                    <TableCell align="right">{row.last_alert?.rider}</TableCell>
+                    <TableCell align="right">{rider.id}</TableCell>
+                    <TableCell align="right">{rider.mobile_number}</TableCell>
+                    <TableCell align="right">
+                      {rider.last_alert?.rider}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

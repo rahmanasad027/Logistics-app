@@ -4,44 +4,24 @@ import SendIcon from "@mui/icons-material/Send";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 
-const Input = ({ phone1 }) => {
+const InputBox = ({ params, handleClick }) => {
   const [rider, setRider] = useState({
     title: "",
     description: "",
     riders: [],
     is_active: true,
   });
+
   useEffect(() => {
-    if (phone1) {
+    if (params) {
       setRider({
         title: "",
         description: "",
-        riders: [phone1],
+        riders: [params],
         is_active: true,
       });
     }
-  }, [phone1]);
-
-  const handleClick = () => {
-    const url = "https://do-rider.cheetay.pk/rider_alerts/";
-    const result = fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "token 692afd3e4b33ee5eba6daaab786907798189d7da",
-      },
-      body: JSON.stringify(rider),
-    })
-      .then((data) => {
-        if (data.ok) {
-          console.log("success");
-        } else {
-          console.log("failure");
-        }
-        console.log("the data", data);
-      })
-      .catch((e) => console.log("error occurs", e));
-  };
+  }, [params]);
 
   const handleChange = (e) => {
     if (e.target.name === "title") {
@@ -60,7 +40,7 @@ const Input = ({ phone1 }) => {
       });
     }
   };
-  console.log("rider data is", rider);
+  // console.log("rider data is", rider);
 
   return (
     <Grid container style={{ padding: "20px" }}>
@@ -84,11 +64,15 @@ const Input = ({ phone1 }) => {
       </Grid>
       <Grid xs={1} align="right">
         <Fab color="primary" aria-label="add">
-          <SendIcon onClick={handleClick} />
+          {rider ? (
+            <SendIcon onClick={() => handleClick(rider)} />
+          ) : (
+            <SendIcon />
+          )}
         </Fab>
       </Grid>
     </Grid>
   );
 };
 
-export default Input;
+export default InputBox;
