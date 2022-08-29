@@ -37,7 +37,7 @@ const RiderData = () => {
       }
     }
   };
-
+  //  this is something new
   const handleclick = (id, phone, name1) => {
     const pageNo = page.toString();
     // console.log("this is phone", phone);
