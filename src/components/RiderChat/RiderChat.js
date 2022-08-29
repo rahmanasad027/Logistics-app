@@ -35,7 +35,6 @@ const RiderChat = () => {
 
   const handleClick = (rider) => {
     if (rider) {
-      setTogle(!togle);
       const url = `${process.env.REACT_APP_BASE_URL}/rider_alerts/`;
       fetch(url, {
         method: "POST",
@@ -45,6 +44,7 @@ const RiderChat = () => {
         .then((data) => {
           if (data.ok) {
             console.log("success");
+            setTogle(!togle);
           } else {
             console.log("failure");
           }

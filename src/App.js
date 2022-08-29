@@ -2,7 +2,7 @@ import React from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 // import Login from "./components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./components/Dashboard";
+import RiderData from "./components/allRiders/RiderData";
 import RiderChat from "./components/RiderChat/RiderChat";
 
 window.h = new Headers();
@@ -22,7 +22,7 @@ function App() {
               <div className="auth-inner">
                 <Routes>
                   {/* <Route exact path='/' element={<Login  />} /> */}
-                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/RiderData" element={<RiderData />} />
                   <Route path="/riderChat" element={<RiderChat />} />
                 </Routes>
               </div>
