@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
-function RiderDisplay({ rider }) {
+function RiderDisplay({ rider, handleClick, handlePage }) {
   return (
     <div>
       <>
@@ -30,7 +30,7 @@ function RiderDisplay({ rider }) {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   style={{ cursor: "pointer" }}
                   onClick={() =>
-                    handleclick(
+                    handleClick(
                       rider.last_alert?.rider,
                       rider.mobile_number,
                       rider.name
@@ -53,7 +53,6 @@ function RiderDisplay({ rider }) {
           <button value={"next"} onClick={(e) => handlePage(e)}>
             <ArrowForwardIosIcon />
           </button>
-          <h4>{page}</h4>
         </TableContainer>
       </>
     </div>

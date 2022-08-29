@@ -8,9 +8,6 @@ const RiderChat = () => {
   const [togle, setTogle] = useState(false);
   const location = useLocation();
   const parameters = location.state;
-  // const h = new Headers();
-  // h.append("Content-Type", "application/json");
-  // h.append("Authorization", "token 692afd3e4b33ee5eba6daaab786907798189d7da");
 
   useEffect(() => {
     getRider();

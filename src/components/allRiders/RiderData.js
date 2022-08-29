@@ -8,6 +8,10 @@ const RiderData = () => {
   const navigate = useNavigate();
   // console.log("this is token in dashboard component",rider)
   useEffect(() => {
+    getData();
+  }, [page]);
+  //  generinc functions. URL search param.
+  const getData = () => {
     const pageNo = page.toString();
     const url = `${process.env.REACT_APP_BASE_URL}/alerts_rider?page=` + pageNo;
     fetch(url, {
@@ -22,9 +26,7 @@ const RiderData = () => {
 
         // console.log(rider,'this is rider data')
       });
-  }, [page]);
-  //  generinc functions. URL search param.
-
+  };
   const handlePage = (e) => {
     if (e.target.value === "next") {
       setPage(page + 1);
@@ -42,8 +44,8 @@ const RiderData = () => {
     const pageNo = page.toString();
     // console.log("this is phone", phone);
     // const Id = id;
-    const state = { pageNo, name1, id, phone };
-    console.log("this is my state:", state);
+    // const state = { pageNo, name1, id, phone };
+    // console.log("this is my state:", state);
     if (id && page && name1 && phone) {
       navigate("/riderChat", { state: { pageNo, name1, Id: id, phone } });
     }
@@ -53,8 +55,15 @@ const RiderData = () => {
     <div>
       <>
         <h1>dashboard</h1>
-        {rider.results ? <RiderDisplay rider={rider} /> : null}
+        {rider.results ? (
+          <RiderDisplay
+            rider={rider}
+            handleClick={handleclick}
+            handlePage={handlePage}
+          />
+        ) : null}
       </>
+      <h4>{page}</h4>
     </div>
   );
 };
