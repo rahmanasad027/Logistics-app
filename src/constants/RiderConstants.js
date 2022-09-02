@@ -1,0 +1,5 @@
+export const riderConstants = {
+  RIDER_DATA: "RIDER_DATA",
+  RIDER_CHAT_DATA: "RIDER_CHAT_DATA",
+  RIDER_MESSAGES: "RIDER_MESSAGES",
+};

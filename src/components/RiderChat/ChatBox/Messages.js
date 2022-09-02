@@ -8,11 +8,16 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
+import { useSelector } from "react-redux";
 
-const Messages = ({ params, message }) => {
+const Messages = () => {
+  const messages = useSelector((state) => state.riderMessages.messages);
+  const state = useSelector((state) => state);
+  const name1 = useSelector((state) => state.riderChatData.data.name1);
+
   return (
     <>
-      {message ? (
+      {messages ? (
         <div>
           <Grid container>
             <Grid item xs={12}>
@@ -31,14 +36,14 @@ const Messages = ({ params, message }) => {
                       src="https://material-ui.com/static/images/avatar/1.jpg"
                     />
                   </ListItemIcon>
-                  <ListItemText primary={params}></ListItemText>
+                  <ListItemText primary={name1}></ListItemText>
                 </ListItem>
               </List>
               <Divider />
             </Grid>
             <Grid item xs={9}>
               <div style={{ height: "450px", overflowY: "scroll" }}>
-                {message.data?.alerts?.map((message) => {
+                {messages.map((message) => {
                   return (
                     <div>
                       <List key={message.id}>
