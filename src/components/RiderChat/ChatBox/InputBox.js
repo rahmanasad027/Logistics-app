@@ -42,7 +42,7 @@ const InputBox = ({ handleClick }) => {
       });
     }
   };
-  console.log("rider data is", rider);
+  // console.log("rider data is", rider);
 
   return (
     <Grid container style={{ padding: "20px" }}>

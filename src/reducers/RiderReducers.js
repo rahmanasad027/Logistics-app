@@ -5,7 +5,7 @@ const initialState = {
 };
 export const riderData = (state = initialState, { type, payload }) => {
   switch (type) {
-    case riderConstants.RIDER_DATA:
+    case riderConstants.FETCH_RIDERS:
       return { ...state, riders: payload };
     default:
       return state;
@@ -30,8 +30,25 @@ const initialMessage = {
 
 export const riderMessages = (state = initialMessage, { type, payload }) => {
   switch (type) {
-    case riderConstants.RIDER_MESSAGES:
-      return { ...state, ...{ messages: payload } };
+    case riderConstants.FETCH_RIDER:
+      return {
+        ...state,
+        messages: payload,
+      };
+    default:
+      return state;
+  }
+};
+const authToken = {
+  token: "",
+};
+export const userToken = (state = authToken, { type, payload }) => {
+  switch (type) {
+    case riderConstants.USER_TOKEN:
+      return {
+        ...state,
+        token: payload,
+      };
     default:
       return state;
   }

@@ -2,33 +2,41 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RiderDisplay from "./RiderTable/RiderDisplay";
 import { useDispatch, useSelector } from "react-redux";
-import { riderChatData, riderData } from "../../actions/RiderActions";
+import {
+  fetchRiders,
+  riderChatData,
+  riderData,
+} from "../../actions/RiderActions";
 
 const RiderData = () => {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const rider = useSelector((state) => state.riderData.riders);
+  const pageNo = page.toString();
+  // const token = useSelector((state) => state.userToken.token);
   useEffect(() => {
-    fetchData();
+    if (page) {
+      dispatch(fetchRiders(pageNo));
+    }
   }, [page]);
   // console.log("this is rider", rider);
   //  generinc functions. URL search param.
-  const fetchData = async () => {
-    const pageNo = page.toString();
-    const url = `${process.env.REACT_APP_BASE_URL}/alerts_rider?page=` + pageNo;
-    const response = await fetch(url, {
-      method: "GET",
-      headers: window.h,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // debugger;
-        dispatch(riderData(data.results));
-        // debugger;
-        // console.log(rider,'this is rider data')
-      });
-  };
+  // const fetchData = async () => {
+  //   const pageNo = page.toString();
+  //   const url = `${process.env.REACT_APP_BASE_URL}/alerts_rider?page=` + pageNo;
+  //   const response = await fetch(url, {
+  //     method: "GET",
+  //     headers: window.h,
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       // debugger;
+  //       dispatch(riderData(data.results));
+  //       // debugger;
+  //       // console.log(rider,'this is rider data')
+  //     });
+  // };
   // const getData = () => {
   //   const pageNo = page.toString();
   //   const url = `${process.env.REACT_APP_BASE_URL}/alerts_rider?page=` + pageNo;
@@ -77,7 +85,7 @@ const RiderData = () => {
     dispatch(riderChatData(data));
     // debugger;
     if (dispatch(riderChatData(data))) {
-      navigate("/riderChat");
+      navigate(`/riderChat/${data.Id}/${data.pageNo}`);
     }
   };
 

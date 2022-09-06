@@ -1,29 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchToken } from "../actions/RiderActions";
+import { useSelector } from "react-redux";
+// import { userToken } from "../reducers/RiderReducers";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.userToken.token);
+  useEffect(() => {
+    if (token) {
+      console.log("token", token);
+      window.h = new Headers();
+      window.h.append("Content-Type", "application/json");
+      window.h.append("Authorization", `token ${token}`);
+    }
+  }, [token]);
 
   async function handleButtonSubmit() {
     const state = { email, password };
-    const url = "https://do-rider.cheetay.pk/login";
-    const result = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    // const url = "https://do-rider.cheetay.pk/login";
+    // const result = await fetch(url, {
+    //   method: "POST"
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
 
-      body: JSON.stringify(state),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setToken(data.token);
-      });
+    //   body: JSON.stringify(state),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     dispatch(userToken(data.token));
+    //     // setToken(data.token);
+    //   });
+    if (state) {
+      dispatch(fetchToken(state));
+    }
+    if (token) {
+      navigate("/riderData");
+    }
   }
-
+  // console.log("token", token);
+  // muhammad.asadullah@cheetay.pk tconstvar123
   return (
     <>
       <h3>Sign In</h3>
@@ -67,7 +89,7 @@ const Login = () => {
         </button>
       </div>
       <p className="forgot-password text-right">
-        Forgot <a href="#">password?</a>
+        Forgot <a>password?</a>
       </p>
     </>
   );
