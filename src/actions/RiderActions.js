@@ -12,7 +12,6 @@ export const fetchRiders = (pageNo) => async (dispatch) => {
         type: riderConstants.FETCH_RIDERS,
         payload: data.results,
       });
-      // console.log("new array is: ", data.data.alerts[0]);
     });
 };
 export const fetchRider = (Id, pageNo) => async (dispatch) => {
@@ -32,14 +31,7 @@ export const fetchRider = (Id, pageNo) => async (dispatch) => {
         type: riderConstants.FETCH_RIDER,
         payload: data.data.alerts,
       });
-      // console.log("new array is: ", data.data.alerts[0]);
     });
-};
-export const riderData = (riders) => {
-  return {
-    type: riderConstants.RIDER_DATA,
-    payload: riders,
-  };
 };
 
 export const riderChatData = (data) => {
@@ -48,20 +40,6 @@ export const riderChatData = (data) => {
     payload: data,
   };
 };
-
-export const riderMessages = (messages) => {
-  return {
-    type: riderConstants.RIDER_MESSAGES,
-    payload: messages,
-  };
-};
-
-// export const userToken = (token) => {
-//   return {
-//     type: riderConstants.USER_TOKEN,
-//     payload: token,
-//   };
-// };
 
 export const fetchToken = (state) => async (dispatch) => {
   const url = `${process.env.REACT_APP_BASE_URL}/login`;

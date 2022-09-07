@@ -3,12 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchToken } from "../actions/RiderActions";
 import { useSelector } from "react-redux";
-// import { userToken } from "../reducers/RiderReducers";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [token, setToken] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.userToken.token);
@@ -23,20 +21,6 @@ const Login = () => {
 
   async function handleButtonSubmit() {
     const state = { email, password };
-    // const url = "https://do-rider.cheetay.pk/login";
-    // const result = await fetch(url, {
-    //   method: "POST"
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-
-    //   body: JSON.stringify(state),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     dispatch(userToken(data.token));
-    //     // setToken(data.token);
-    //   });
     if (state) {
       dispatch(fetchToken(state));
     }
@@ -44,8 +28,7 @@ const Login = () => {
       navigate("/riderData");
     }
   }
-  // console.log("token", token);
-  // muhammad.asadullah@cheetay.pk tconstvar123
+
   return (
     <>
       <h3>Sign In</h3>

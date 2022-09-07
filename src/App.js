@@ -6,7 +6,6 @@ import RiderData from "./components/allRiders/RiderData";
 import RiderChat from "./components/RiderChat/RiderChat";
 import Protected from "./components/Protected";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { riderData } from "./actions/RiderActions";
 
 function App() {
   return (
