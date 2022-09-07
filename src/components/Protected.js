@@ -17,6 +17,7 @@ const Protected = () => {
   //   const token = useSelector((state) => state.userToken.token);
   //   console.log("token in protected component", token);
   //   console.log("auth:", auth);
+  // this code is updated
 
   return auth ? <Outlet /> : <Navigate to="/" />;
 };
