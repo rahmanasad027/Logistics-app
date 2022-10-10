@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { fetchToken } from "../actions/RiderActions";
-import { useSelector } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+// import { useDispatch } from "react-redux";
+// import { fetchToken } from "../actions/RiderActions";
+// import { useSelector } from "react-redux";
+import { useRiderPostData } from "../RiderApis";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const token = useSelector((state) => state.userToken.token);
-  useEffect(() => {
-    if (token) {
-      console.log("token", token);
-      window.h = new Headers();
-      window.h.append("Content-Type", "application/json");
-      window.h.append("Authorization", `token ${token}`);
-    }
-  }, [token]);
-
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const token = useSelector((state) => state.userToken.token);
+  // useEffect(() => {
+  //   if (token) {
+  //     console.log("token", token);
+  //     window.h = new Headers();
+  //     window.h.append("Content-Type", "application/json");
+  //     window.h.append("Authorization", `token ${token}`);
+  //   }
+  // }, [token]);
+  const { mutate } = useRiderPostData();
   async function handleButtonSubmit() {
     const state = { email, password };
     if (state) {
-      dispatch(fetchToken(state));
+      // dispatch(fetchToken(state));
+      mutate(state);
     }
-    if (token) {
-      navigate("/riderData");
-    }
+    // if (token) {
+    //   navigate("/riderData");
+    // }
   }
 
   return (
