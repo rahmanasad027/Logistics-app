@@ -24,7 +24,7 @@ function RiderDisplay({ rider, handleClick, handlePage }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rider.results.map((rider) => (
+              {rider.map((rider) => (
                 <TableRow
                   key={rider.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

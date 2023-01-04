@@ -3,25 +3,27 @@ import Fab from "@mui/material/Fab";
 import SendIcon from "@mui/icons-material/Send";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
+import { useSelector } from "react-redux";
 
-const InputBox = ({ params, handleClick }) => {
+const InputBox = ({ handleClick }) => {
   const [rider, setRider] = useState({
     title: "",
     description: "",
     riders: [],
     is_active: true,
   });
+  const phone = useSelector((state) => state.riderChatData.data.phone);
 
   useEffect(() => {
-    if (params) {
+    if (phone) {
       setRider({
         title: "",
         description: "",
-        riders: [params],
+        riders: [phone],
         is_active: true,
       });
     }
-  }, [params]);
+  }, [phone]);
 
   const handleChange = (e) => {
     if (e.target.name === "title") {
@@ -40,7 +42,6 @@ const InputBox = ({ params, handleClick }) => {
       });
     }
   };
-  // console.log("rider data is", rider);
 
   return (
     <Grid container style={{ padding: "20px" }}>
